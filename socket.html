@@ -1,0 +1,27 @@
+<html>
+	<head>
+		<script type="text/javascript">
+			var websocket;
+			
+			var init = function() {
+				websocket = new WebSocket("ws://echo.websocket.org");
+			
+				// Callbacks 
+				websocket.onopen = function(evt) { alert("onopen " + evt) }; 
+				websocket.onclose = function(evt) { alert("onclose " + evt) }; 
+				websocket.onmessage = function(evt) { alert("onmessage " + evt.data) }; 
+				websocket.onerror = function(evt) { alert("onerror " + evt) };
+			};
+			
+			var send = function(message) {
+				websocket.send(message);
+			};
+			
+			window.addEventListener("load", init, false); 
+		</script>
+	</head>
+	<body>
+		<input type="text" id="thetext" value="Hi" />
+		<input type="button" value="send" onclick="send(document.getElementById('thetext').value);" />
+	</body>
+</html>
